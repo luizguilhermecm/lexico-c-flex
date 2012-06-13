@@ -27,7 +27,7 @@
 [/][*]([^*]|[*]+[^/])*[*]+[/] 
 [/][/].*                      
 
-X'[0-9A-Fa-f]+' |
+X'[0-9A-Fa-f]+' | 
 0X[0-9A-Fa-f]+                { printf("NUM_HEXA")    ; words++ ; chars += strlen(yytext) ; }
 
 [a-zA-Z]                      { printf("CARACTER")    ; words++ ; chars += strlen(yytext) ; }
@@ -78,6 +78,6 @@ X'[0-9A-Fa-f]+' |
 
 int main(int argc, char **argv){
   yylex();
-  printf("%8d%8d%8d\n", lines, words, chars);
+  printf("Lines: %d\tWords: %d\tChars: %d\n", lines, words, chars);
   return 0;
 }
