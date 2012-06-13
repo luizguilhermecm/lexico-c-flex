@@ -1,1 +1,4 @@
 Léxico feito em Flex da linguagem C
+
+Para compilar: make run
+depois entrar com texto a ser análisado.
