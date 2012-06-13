@@ -8,7 +8,7 @@
 %%
 
 "void"    { printf("VOID")    ; words++ ; chars += strlen(yytext) ; }
-"int"     { printf("INT")     ; words++ ; chars +=strlen(yytext)  ; }
+"int"     { printf("INT")     ; words++ ; chars += strlen(yytext) ; }
 "char"    { printf("CHAR")    ; words++ ; chars += strlen(yytext) ; }
 "return"  { printf("RETURN")  ; words++ ; chars += strlen(yytext) ; }
 "break"   { printf("BREAK")   ; words++ ; chars += strlen(yytext) ; }
