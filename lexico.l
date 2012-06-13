@@ -24,10 +24,12 @@
 "define"  { printf("DEFINE"); words++; chars += strlen(yytext);}
 "exit"  { printf("EXIT"); words++; chars += strlen(yytext);}
 
+X'[0-9A-Fa-f]+' |
+0X[0-9A-Fa-f]+ { printf("NUM_HEXA");}
+
 [a-zA-Z_][a-zA-Z0-9_]* { printf("IDENTIFIER"); words++; chars += strlen(yytext);}
 '(\\.|''|[^'\n])*' |
-\"(\\.|\"\"|[^"\n])*\" { printf("hexa");}
-
+\"(\\.|\"\"|[^"\n])*\" { printf("STRING");}
 [0-9]+   { printf("NUM_INTEGER"); words++; chars += strlen(yytext);}
 ^0[1-7][0-7]*$ {printf ("NUM_OCTAL"); words++; chars += strlen(yytext);}
 
