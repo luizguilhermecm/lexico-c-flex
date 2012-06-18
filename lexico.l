@@ -35,7 +35,7 @@ X'[0-9A-Fa-f]+' |
 \'([^\']|\\.)?\'                      { printf("CARACTER")    ; words++; chars += strlen(yytext); }
 
 [a-zA-Z_][a-zA-Z0-9_]*        { printf("IDENTIFIER")  ; words++; chars += strlen(yytext); }
-\"(\\.|\"\"|[^"\n])*\"        { printf("STRING")      ; words++; chars += strlen(yytext); }
+\"(\\.|[^\\"])*\"        { printf("STRING")      ; words++; chars += strlen(yytext); }
 
 
 
