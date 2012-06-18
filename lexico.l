@@ -27,8 +27,10 @@
 [/][*]([^*]|[*]+[^/])*[*]+[/] 
 [/][/].*                      
 
+^0[1-7][0-7]*$                { printf ("NUM_OCTAL")  ; words++; chars += strlen(yytext); }
 X'[0-9A-Fa-f]+' | 
 0X[0-9A-Fa-f]+                { printf("NUM_HEXA")    ; words++; chars += strlen(yytext); }
+[0-9]+                        { printf("NUM_INTEGER") ; words++; chars += strlen(yytext); }
 
 '[a-zA-Z]'                      { printf("CARACTER")    ; words++; chars += strlen(yytext); }
 
@@ -38,8 +40,8 @@ X'[0-9A-Fa-f]+' |
 
 \"(\\.|\"\"|[^"\n])*\"        { printf("STRING")      ; words++; chars += strlen(yytext); }
 
-[0-9]+                        { printf("NUM_INTEGER") ; words++; chars += strlen(yytext); }
-^0[1-7][0-7]*$                { printf ("NUM_OCTAL")  ; words++; chars += strlen(yytext); }
+
+
 
 "+"  { printf("PLUS")                ; words++; chars += strlen(yytext); }
 "-"  { printf("MINUS")               ; words++; chars += strlen(yytext); }
