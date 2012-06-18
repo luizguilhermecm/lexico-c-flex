@@ -30,10 +30,12 @@
 X'[0-9A-Fa-f]+' | 
 0X[0-9A-Fa-f]+                { printf("NUM_HEXA")    ; words++; chars += strlen(yytext); }
 
-[a-zA-Z]                      { printf("CARACTER")    ; words++; chars += strlen(yytext); }
+'[a-zA-Z]'                      { printf("CARACTER")    ; words++; chars += strlen(yytext); }
+
 [a-zA-Z_][a-zA-Z0-9_]*        { printf("IDENTIFIER")  ; words++; chars += strlen(yytext); }
 
-'(\\.|''|[^'\n])*' |
+'[a-zA-Z_][a-zA-Z0-9_]*'        { printf("ERRO")  ; words++; chars += strlen(yytext); }
+
 \"(\\.|\"\"|[^"\n])*\"        { printf("STRING")      ; words++; chars += strlen(yytext); }
 
 [0-9]+                        { printf("NUM_INTEGER") ; words++; chars += strlen(yytext); }
@@ -73,6 +75,7 @@ X'[0-9A-Fa-f]+' |
 "#"  { printf("NUMBER_SIGN")         ; words++; chars += strlen(yytext); }
 ";"  { printf("SEMICOLON")           ; words++; chars += strlen(yytext); }
 
+.  { printf(" ERROO linha: %d\tColuna: %d ",lines, chars);}
 %%
 
 int main(int argc, char **argv){
