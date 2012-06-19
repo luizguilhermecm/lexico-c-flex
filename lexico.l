@@ -8,7 +8,7 @@
 
 %%
 
-[\n] { lines++; chars = 1; }
+[\n] { printf("\n"); lines++; chars = 1; }
 
 "void"    { printf("%s<VOID> ",yytext)    ; words++; chars += strlen(yytext); }
 "int"     { printf("%s<INT> ",yytext)     ; words++; chars += strlen(yytext); }
@@ -80,11 +80,11 @@
         /* comentário */
 
 
-.  { printf("%s<%d,%d> ",yytext,lines, chars);} /* qualquer outro caracter */
+.  { printf("%s<ERRO->L:%d,C:%d> ",yytext,lines, chars);} /* qualquer outro caracter */
 %%
 
 int main(int argc, char **argv){
   yylex();
-  printf("Lines: %d\tWords: %d\tChars: %d\n", lines, words, chars);
+  //  printf("Lines: %d\tWords: %d\tChars: %d\n", lines, words, chars);
   return 0;
 }
