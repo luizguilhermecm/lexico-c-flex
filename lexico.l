@@ -1,8 +1,9 @@
 /* lexico flex */
 %{
+  int i = 0;
   int chars = 1;
   int words = 0;
-  int lines = 0;
+  int lines = 1;
 %}
 
 %%
@@ -26,14 +27,14 @@
 "define"  { printf("%s<DEFINE> ",yytext)  ; words++; chars += strlen(yytext); }
 "exit"    { printf("%s<EXIT> ",yytext)    ; words++; chars += strlen(yytext); }
 
-[/][*]([^*]|[*]+[^/])*[*]+[/] 
+[/][*]([^*]|[*]+[^/])*[*]+[/] {i=0; while(i<strlen(yytext)){if (yytext[i]=='\n') lines++;i++;}; printf("<block:%d> ",(int)strlen(yytext));}
 [/][/].*                      
 
 [ \t] { chars += strlen(yytext); } /* Desconsidera tab e blank e conta caracteres */
 
 0(X|x){1}[0-9A-Fa-f]+                { printf("%s<NUM_HEXA> ",yytext)    ; words++; chars += strlen(yytext); }
 
-'[a-zA-Z]'                      { printf("%s<CARACTER> ",yytext)    ; words++; chars += strlen(yytext); }
+\'([^\']|\\.)?\'                      { printf("%s<CARACTER> ",yytext)    ; words++; chars += strlen(yytext); }
 
 [a-zA-Z_][a-zA-Z0-9_]*        { printf("%s<IDENTIFIER> ",yytext)  ; words++; chars += strlen(yytext); }
 
