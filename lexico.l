@@ -23,6 +23,7 @@
 "if"      { printf("IF\n")      ;  chars += strlen(yytext); }
 "else"    { printf("ELSE\n")    ;  chars += strlen(yytext); }
 "printf"  { printf("PRINTF\n")  ;  chars += strlen(yytext); }
+"scanf"   { printf("SCANF\n")   ;  chars += strlen(yytext); }
 "define"  { printf("DEFINE\n")  ;  chars += strlen(yytext); }
 "exit"    { printf("EXIT\n")    ;  chars += strlen(yytext); }
 
