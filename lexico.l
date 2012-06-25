@@ -25,6 +25,7 @@
 "scanf"   { printf("SCANF\n")   ;  chars += strlen(yytext); }
 "define"  { printf("DEFINE\n")  ;  chars += strlen(yytext); }
 "exit"    { printf("EXIT\n")    ;  chars += strlen(yytext); }
+
   /*comentários*/
 [/][*]([^*]|[*]+[^/])*[*]+[/] {i=0; while(i<strlen(yytext)){if (yytext[i]=='\n'){ lines++; chars=0; };chars++; i++;};}
 [/][/].*                      
