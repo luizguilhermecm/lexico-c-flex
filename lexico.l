@@ -1,4 +1,4 @@
-/* lexico flex */
+%option noyywrap
 %{
   int i = 0;
   int chars = 1;
@@ -6,8 +6,7 @@
 %}
 
 %%
-
-[\n] { lines++; chars = 1; }
+[\n] { lines++; chars = 1; } 
 
 "void"    { printf("VOID\n")    ;  chars += strlen(yytext); }
 "int"     { printf("INT\n")     ;  chars += strlen(yytext); }
@@ -26,7 +25,6 @@
 "scanf"   { printf("SCANF\n")   ;  chars += strlen(yytext); }
 "define"  { printf("DEFINE\n")  ;  chars += strlen(yytext); }
 "exit"    { printf("EXIT\n")    ;  chars += strlen(yytext); }
-
   /*comentários*/
 [/][*]([^*]|[*]+[^/])*[*]+[/] {i=0; while(i<strlen(yytext)){if (yytext[i]=='\n'){ lines++; chars=0; };chars++; i++;};}
 [/][/].*                      
@@ -35,16 +33,12 @@
 [ \t]     { chars += strlen(yytext); } 
 
 0(X|x){1}[0-9A-Fa-f]+    { printf("NUM_HEXA(%s)\n",yytext)    ; chars += strlen(yytext) ; }
-
-\'([^\']|\\.)?\'         { printf("CARACTER(%s)\n",yytext)    ; chars += strlen(yytext) ; }
-
-0[1-7][0-7]*$            { printf ("NUM_OCTAL(%s)\n",yytext)  ; chars += strlen(yytext) ; }
-
+0[1-7][0-7]*             { printf ("NUM_OCTAL(%s)\n",yytext)  ; chars += strlen(yytext) ; }
 [0-9]+                   { printf("NUM_INTEGER(%s)\n",yytext) ; chars += strlen(yytext) ; }
 
-[a-zA-Z_][a-zA-Z0-9_]*   { printf("IDENTIFIER(%s)\n",yytext)  ; chars += strlen(yytext) ; }
-
+\'([^\']|\\.)?\'         { printf("CARACTER(%s)\n",yytext)    ; chars += strlen(yytext) ; }
 \"(\\.|\"\"|[^"\n])*\"   { printf("STRING(%s)\n",yytext)      ; chars += strlen(yytext) ; }
+[a-zA-Z_][a-zA-Z0-9_]*   { printf("IDENTIFIER(%s)\n",yytext)  ; chars += strlen(yytext) ; }
 
 "+"  { printf("PLUS\n")                ;  chars += strlen(yytext); }
 "-"  { printf("MINUS\n")               ;  chars += strlen(yytext); }
@@ -79,6 +73,7 @@
 "?"  { printf("TERNARY_CONDITIONAL\n") ;  chars += strlen(yytext); }
 "#"  { printf("NUMBER_SIGN\n")         ;  chars += strlen(yytext); }
 ";"  { printf("SEMICOLON\n")           ;  chars += strlen(yytext); }
+
 
   /* erro genérico */
 .  { printf("ERRO: LINHA: %d,COLUNA:%d\n",lines, chars);} /* qualquer outro caracter */
