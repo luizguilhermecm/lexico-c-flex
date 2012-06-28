@@ -27,7 +27,7 @@
 "exit"    { printf("EXIT\n")    ;  chars += strlen(yytext); }
 
   /*comentários*/
-[/][*]([^*]|[*]+[^/])*[*]+[/] {i=0; while(i<strlen(yytext)){if (yytext[i]=='\n'){ lines++; chars=0; };chars++; i++;};}
+[/][*]([^*]|[*]+[^/])*[*]+[/] {i=0; while(i<strlen(yytext)){if (yytext[i]=='\n'){ lines++; chars=1; };chars++; i++;};}
 [/][/].*                      
 
   /*tab e white*/
